@@ -1,0 +1,261 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Bakery</title>
+    <!-- Responsive -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="Bakery - Cake Shop">
+    <meta name="keywochs" content="Cake Shop Design, html, template, responsive, corporate, business, Shop">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+    <!-- favicon -->
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    
+    <!--fonts-->
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i&amp;display=swap">
+    
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <!--Style-->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/fonts.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    
+    <script type="text/javascript">
+      let user = '{{request.user}}';
+      function getToken(name) {
+          let cookieValue = null;
+          if (document.cookie && document.cookie !== '') {
+              const cookies = document.cookie.split(';');
+              for (let i = 0; i < cookies.length; i++) {
+                  const cookie = cookies[i].trim();
+                  // Does this cookie string begin with the name we want?
+                  if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                      cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                      break;
+                  }
+              }
+          }
+          return cookieValue;
+      }
+      const csrftoken = getToken('csrftoken');
+    </script>
+</head>
+
+<body>
+<!-- page -->
+
+  <!-- Page Header-->
+
+  <header class="section page-header"> 
+    <div class="ch-navbar-wrap">
+      <nav class="ch-navbar ch-navbar-classic" data-layout="ch-navbar-fixed" data-sm-layout="ch-navbar-fixed" data-md-layout="ch-navbar-fixed" data-md-device-layout="ch-navbar-fixed" data-lg-layout="ch-navbar-static" data-lg-device-layout="ch-navbar-fixed" data-xl-layout="ch-navbar-static" data-xl-device-layout="ch-navbar-static" data-xxl-layout="ch-navbar-static" data-xxl-device-layout="ch-navbar-static" data-lg-stick-up-offset="100px" data-xl-stick-up-offset="100px" data-xxl-stick-up-offset="100px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+        <div class="ch-navbar-main-outer">
+          <div class="ch-navbar-main"> 
+            <!-- RD Navbar Panel-->
+            <div class="ch-navbar-panel"> 
+              <!-- RD Navbar Toggle-->
+              <button class="ch-navbar-toggle" data-ch-navbar-toggle=".ch-navbar-nav-wrap"><span></span></button>
+              <!-- RD Navbar Brand-->
+              <div class="ch-navbar-brand"> 
+                <!--Brand--><a href="index-2.html"><img class="logo-default" src="images/logos/logo-default.png" alt="" /></a> </div>
+            </div>
+            <div class="ch-navbar-nav-wrap">
+              <ul class="ch-navbar-nav">
+                <li class="ch-nav-item active"><a class="ch-nav-link" href="{% url 'store' %}">Home</a></li>
+                <li class="ch-nav-item active"><a class="ch-nav-link" href="{% url 'shop' %}">Shop</a></li>
+                <li class="ch-nav-item active"><a class="ch-nav-link" href="{% url 'customCake' %}">Customize cake</a></li>
+              </ul>
+            </div>
+            <div class="ch-navbar-main-element"> 
+              <!-- RD Navbar Search-->
+              <div class="ch-navbar-search ch-navbar-search-2">
+                <button class="ch-navbar-search-toggle ch-navbar-fixed-element-3" data-ch-navbar-toggle=".ch-navbar-search"><span></span></button>
+                <form class="ch-search" action="http://malikhassan.com/blog_designer/tehzeeb/html/search-results.html" data-search-live="ch-search-results-live" method="GET">
+                  <div class="form-wrap">
+                    <input class="ch-navbar-search-form-input form-input" id="ch-navbar-search-form-input" type="text" name="s" autocomplete="off"/>
+                    <label class="form-label" for="ch-navbar-search-form-input">Search...</label>
+                    <div class="ch-search-results-live" id="ch-search-results-live"></div>
+                    <button class="ch-search-form-submit fl-bigmug-line-search74" type="submit"></button>
+                  </div>
+                </form>
+              </div>
+              <!-- RD Navbar Basket-->
+              {% if user.is_authenticated %}
+                <span class="mx-2 font-weight-bold text-uppercase" style="color:#A58838;">Hello, {{request.user.username}}</span>
+                <a href="{% url 'logout' %}" class="mx-2 font-weight-bold text-uppercase button-sm button-primary ">Logout</a>
+              {% else %}
+                <span class="mx-2 font-weight-bold text-uppercase" style="color:#A58838;">Hello, Guest</span>
+                <a href="{% url 'login' %}" class="mx-2 font-weight-bold text-uppercase button-sm button-primary ">Login</a>
+              {% endif %}
+              <div class="ch-navbar-basket-wrap">
+                <a href="{% url 'cart'%}"><button class="ch-navbar-basket fl-bigmug-line-shopping202"></button> <span>{{order.get_cart_items}}</span></button></a>
+                <div class="cart-inline">
+                  <div class="cart-inline-header">
+                    <h5 class="cart-inline-title">In cart:<span> {{order.get_cart_items}}</span> Products</h5>
+                    <h6 class="cart-inline-title">Total price:<span> Rs.<strong>{{order.get_cart_total}}</strong></span></h6>
+                  </div>
+                  <div class="cart-inline-body">
+                    <div class="cart-inline-item">
+                      <div class="unit unit-spacing-sm align-items-center">
+                        <div class="unit-left"><a class="cart-inline-figure" href="single-product.html"><img src="images/about/post-mini-1.jpg" alt="" width="100" height="90"/></a></div>
+                        <div class="unit-body">
+                          <h6 class="cart-inline-name"><a href="single-product.html">Unicorn Cake</a></h6>
+                          <div>
+                            <div class="group-xs group-middle">
+                              <div class="table-cart-stepper">
+                                <input class="form-input" type="number" data-zeros="true" value="1" min="1" max="1000"/>
+                              </div>
+                              <h6 class="cart-inline-title">$13.00</h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cart-inline-item">
+                      <div class="unit unit-spacing-sm align-items-center">
+                        <div class="unit-left"><a class="cart-inline-figure" href="single-product.html"><img src="images/about/post-mini-2.jpg" alt="" width="100" height="90"/></a></div>
+                        <div class="unit-body">
+                          <h6 class="cart-inline-name"><a href="single-product.html">Strawberry Cupcakes</a></h6>
+                          <div>
+                            <div class="group-xs group-middle">
+                              <div class="table-cart-stepper">
+                                <input class="form-input" type="number" data-zeros="true" value="1" min="1" max="1000"/>
+                              </div>
+                              <h6 class="cart-inline-title">$17.00</h6>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cart-inline-footer">
+                    <div class="group-sm"><a class="button button-default-outline-2 button-zakaria" href="{% url 'cart' %}">Go to cart</a><a class="button button-primary button-zakaria" href="checkout.html">Checkout</a></div>
+                  </div>
+                </div>
+              </div>
+              <a class="ch-navbar-basket ch-navbar-basket-mobile fl-bigmug-line-shopping202 ch-navbar-fixed-element-2" href="cart-page.html"><span>2</span></a>
+              <button class="ch-navbar-project-hamburger ch-navbar-project-hamburger-open ch-navbar-fixed-element-1" type="button" data-multitoggle=".ch-navbar-main" data-multitoggle-blur=".ch-navbar-wrap" data-multitoggle-isolate="data-multitoggle-isolate"><span class="project-hamburger"><span class="project-hamburger-line"></span><span class="project-hamburger-line"></span><span class="project-hamburger-line"></span><span class="project-hamburger-line"></span></span></button>
+            </div>
+            <div class="ch-navbar-project">
+              <div class="ch-navbar-project-header">
+                <button class="ch-navbar-project-hamburger ch-navbar-project-hamburger-close" type="button" data-multitoggle=".ch-navbar-main" data-multitoggle-blur=".ch-navbar-wrap" data-multitoggle-isolate><span class="project-close"><span></span><span></span></span></button>
+                <h5 class="ch-navbar-project-title">Our Contacts</h5>
+              </div>
+              <div class="ch-navbar-project-content">
+                <div>
+                  <div> 
+                    <!-- Owl Carousel-->
+                   <div class="owl-carousel" data-items="1" data-dots="true" data-autoplay="true">
+                    <img src="images/about/image-1.jpg" class="img-responsive" alt="" />
+                    <img src="images/about/image-4.jpg" class="img-responsive" alt="" />
+                    <img src="images/about/image-8.jpg" class="img-responsive" alt="" />
+                   </div>
+                    <ul class="contacts-modern">
+                      <li><a href="#">272B St#4, 1st Floor<br/>
+                        DC Office, Washington USA</a></li>
+                      <li><a href="tel:#">+01-23-4226789</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <ul class="list-inline list-social list-inline-xl">
+                      <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                      <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                      <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                      <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+ 
+        {% block content %}
+
+        {% endblock content %}
+    <!-- Page Footer-->
+  <footer class="section footer-modern footer-modern-2">
+    <div class="footer-modern-body section-xl">
+      <div class="container">
+        <div class="row row-40 row-md-50 justify-content-xl-between">
+          <div class="col-md-10 col-lg-3 col-xl-4 wow fadeInRight">
+            <div class="inset-xl-right-70 block-1">
+              <div class="footer-classic-brand"> 
+                <!--Brand-->
+                <a href="index-2.html"><img class="footer-default" src="images/logos/footer-default.png" alt="" /></a> </div>
+              <p class="footer-classic-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standach dummy text ever since the 1500s, when an unknown printer took a galley book.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-7 col-lg-5 wow fadeInRight" data-wow-delay=".1s">
+            <h5 class="footer-modern-title">Navigation</h5>
+            <ul class="footer-modern-list footer-modern-list-2 d-sm-inline-block d-md-block">
+              <li><a href="{% url 'store' %}">Home</a></li>
+              <li><a href="{% url 'shop' %}">Shop</a></li>
+              <li><a href="{% url 'customCake' %}">Customize cake</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Our Team</a></li>
+              <li><a href="#">Contact Us</a></li>
+              
+            </ul>
+          </div>
+          <div class="col-sm-6 col-md-5 col-lg-4 col-xl-3 wow fadeInRight" data-wow-delay=".2s">
+            <h5 class="footer-modern-title">Get in touch</h5>
+            <ul class="contacts-creative">
+              <li>
+                <div class="unit unit-spacing-sm flex-column flex-md-row">
+                  <div class="unit-left"><span class="icon mdi mdi-map-marker"></span></div>
+                  <div class="unit-body"><a href="#">Gujarat,India</a></div>
+                </div>
+              </li>
+              <li>
+                <div class="unit unit-spacing-sm flex-column flex-md-row">
+                  <div class="unit-left"><span class="icon mdi mdi-phone"></span></div>
+                  <div class="unit-body"><a href="tel:#">+91-1234567890</a></div>
+                </div>
+              </li>
+              <li>
+                <div class="unit unit-spacing-sm flex-column flex-md-row">
+                  <div class="unit-left"><span class="icon mdi mdi-email-outline"></span></div>
+                  <div class="unit-body"><a href="#">xyz@example.com</a></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-modern-panel text-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="footer-copyright">
+              <p>Copyright © 2020 <a href="{% url 'store' %}">bakery</a>. All Right Reserved.<a href="#">Privacy Policy</a></p>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="footer-payment-icon"> <a href="#"><img src="images/about/paymentimg.png" alt=""></a> </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>    
+
+    <div class="snackbars" id="form-output-global"></div>
+    <script src="{% static 'js/core.min.js' %}"></script> 
+    <script src="{% static 'js/script.js' %}"></script>
+    <!--js-->
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+   
+</body>
+</html>

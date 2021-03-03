@@ -1,0 +1,43 @@
+{% extends 'app/main.html' %}
+{% load static %}
+{% block content %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+ <!--+breadcrumbs-->
+ <section class="breadcrumbs-custom">
+	<div class="parallax-container breadcrumbs_section">
+	  <div class="breadcrumbs-custom-body parallax-content context-dark">
+		<div class="container">
+		  <h1 class="breadcrumbs-custom-title">Customize Your Cake</h1>
+		</div>
+	  </div>
+	</div>
+	<div class="breadcrumbs-custom-footer">
+	  <div class="container">
+		<ul class="breadcrumbs-custom-path">
+		  <li><a href="{% url 'store' %}">Home</a></li>
+		  <li><a href="{% url 'shop' %}">Shop</a></li>
+		  <li class="active">cart</li>
+		</ul>
+	  </div>
+	</div>
+  </section>
+    <div class="container">
+        <br>
+        <div class="col-md-8" style="margin:auto;">
+            <div class="card">
+                <div class="card-body">
+                    <form method='POST'>
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <a href="{% url 'cart' %}"><input class="button button-sm button-secondary button-zakaria" type="submit" value="Add To Cart"></a>
+                    </form>
+                </div>
+            </div>        
+        </div>
+    </div>
+    <br>
+
+
+{% endblock content %}      

@@ -1,0 +1,20 @@
+{% extends 'seller/main.html' %}
+{% load static %}
+{% block content %}
+
+<br>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form method='POST'>
+                    {% csrf_token %}
+                    <h4 class="card-title"><i class="fas fa-trash-alt"></i> Delete Product</h4>
+                    <p>Are you sure you want to delete <strong>"{{product}}"</strong> ?</p>
+                    <a class="btn btn-sm btn-warning" href="{% url 'product' %}">Cancel</a>
+                
+                    <input class="btn btn-sm btn-danger" type="submit" value="Confirm">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

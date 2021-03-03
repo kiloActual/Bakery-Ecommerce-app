@@ -1,0 +1,327 @@
+{% extends 'app/main.html' %}
+{% load static %}
+{% block content %}
+<!-- Swiper-->
+<section class="section swiper-container swiper-slider swiper-slider-4" data-loop="true" data-effect="fade">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide swiper-slide-1" data-slide-bg="images/slider/slide-1.jpg">
+        <div class="swiper-slide-caption section-md text-sm-left">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7">
+                <h1 class="swiper-title-1" data-caption-animate="fadeInLeft" data-caption-delay="100">Customize Your Cake</h1>
+                <h6 class="swiper-title-2 text-width-medium" data-caption-animate="fadeInLeft" data-caption-delay="250">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</h6>
+                <div class="button-wrap" data-caption-animate="fadeInLeft" data-caption-delay="400"><a class="button button-sm button-primary button-zakaria" href="grid-shop.html">Shop now</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-slide swiper-slide-1" data-slide-bg="images/slider/slide-2.jpg">
+        <div class="swiper-slide-caption section-md text-sm-left">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7">
+                <h1 class="swiper-title-1" data-caption-animate="fadeInLeft" data-caption-delay="100">Customize Your Cake</h1>
+                <h6 class="swiper-title-2 text-width-medium" data-caption-animate="fadeInRight" data-caption-delay="250">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.</h6>
+                <div class="button-wrap" data-caption-animate="fadeInUp" data-caption-delay="400"><a class="button button-sm button-primary button-zakaria" href="grid-shop.html">Shop now</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Swiper Pagination-->
+    <div class="swiper-pagination"></div>
+    <!-- Swiper Navigation-->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </section>
+  <!-- What We Offer-->
+  <section class="section section-xxl section-xxl-2 bg-default text-md-left">
+    <div class="container">
+      <div class="row row-70 row-lg-70 justify-content-center align-items-md-center">
+        
+        <div class="col-xl-12">
+          <div class="row row-30 ">
+            <div class="col-md-4 col-lg-4 wow fadeInLeft" data-wow-delay=".2s">
+              <article class="box-icon-creative">
+                <div class="unit flex-column flex-md-row flex-lg-column flex-xl-row align-items-md-center align-items-lg-start align-items-xl-center">
+                  <div class="unit-left">
+                    <div class="box-icon-creative-icon restaurant-icon-27"></div>
+                  </div>
+                  <div class="unit-body">
+                    <h4 class="box-icon-creative-title"><a href="#">Free Shipping</a></h4>
+                    <p class="box-icon-creative-text">Enjoy our fast &amp; free delivery</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-4 col-lg-4 wow fadeInLeft" data-wow-delay=".1s">
+              <article class="box-icon-creative">
+                <div class="unit flex-column flex-md-row flex-lg-column flex-xl-row align-items-md-center align-items-lg-start align-items-xl-center">
+                  <div class="unit-left">
+                    <div class="box-icon-creative-icon restaurant-icon-22"></div>
+                  </div>
+                  <div class="unit-body">
+                    <h4 class="box-icon-creative-title"><a href="#">Fresh &amp; Tasty</a></h4>
+                    <p class="box-icon-creative-text">Only the freshest ingredients</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="col-md-4 col-lg-4 wow fadeInLeft">
+              <article class="box-icon-creative">
+                <div class="unit flex-column flex-md-row flex-lg-column flex-xl-row align-items-md-center align-items-lg-start align-items-xl-center">
+                  <div class="unit-left">
+                    <div class="box-icon-creative-icon restaurant-icon-23"></div>
+                  </div>
+                  <div class="unit-body">
+                    <h4 class="box-icon-creative-title"><a href="#">Made with love</a></h4>
+                    <p class="box-icon-creative-text">Prepared with care for our clients</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- New Flavors-->
+  <section class="section section-xxl bg-primary-2">
+    <div class="container">
+      <h2 class="text-transform-capitalize wow fadeScale">Our Products</h2>
+      <div class="row row-lg row-30 row-lg-50">
+        {% for product in products %}
+        <div class="col-sm-6 col-md-4 col-lg-3"> 
+          <!-- Product-->
+          <article class="product wow fadeInRight">
+            <div class="product-body">
+            <div class="product-figure"><img src="{{product.imageURL}}" alt="" width="148" height="128"/> </div>
+            <h5 class="product-title"><a href="single-product.html">{{product.name}}</a></h5>
+            <div class="product-price-wrap">
+                <div class="product-price">&#x20B9;{{product.price}}</div>
+            </div>
+            </div>
+            <span class="product-badge product-badge-sale">Sale</span>
+            <div class="product-button-wrap">
+            <div class="product-button"><a class="button button-gray-14 button-zakaria fl-bigmug-line-search74" href="{% url 'products' product.id product.name %}"></a></div>
+            <div class="product-button"><a class="button button-primary-2 button-zakaria fl-bigmug-line-shopping202 update-cart" data-product="{{product.id}}" data-action="add"></a></div>
+            </div>
+        </article> 
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+ 
+  <section class="section bg-brown-1 call_section_1">
+    <div class="parallax-content section-xxl context-dark">
+      <div class="container">
+        <h3 class="text-spacing-100">Summer <span class="font-weight-light">sale</span> </h3>
+        <h6 class="font-weight-light">Flavum, regius rumors vix prensionem de emeritis, camerarius compater.</h6>
+        <a class="button button-sm button-shadow-2 button-primary button-zakaria" href="#">Shop Now</a> </div>
+    </div>
+  </section>
+  <!-- Masonry Gallery-->
+  <section class="section section-xxl bg-default">
+    <div class="container">
+      <h2 class="text-transform-capitalize wow fadeScale">Gallery</h2>
+      <div class="isotope-wrap">
+        <div class="row row-30 isotope isotope-custom-1" data-lightgallery="group">
+          <div class="col-sm-6 col-lg-4 col-xl-3 isotope-item"> 
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail-classic block-1">
+              <div class="thumbnail-classic-figure"><img src="images/masonry-gallery/image-1.jpg" alt="" width="270" height="250"/> </div>
+              <div class="thumbnail-classic-caption">
+                <div>
+                  <h5 class="thumbnail-classic-title"><a href="single-product.html">macarons</a></h5>
+                  <div class="thumbnail-classic-price">$8.99</div>
+                  <div class="thumbnail-classic-button-wrap">
+                    <div class="thumbnail-classic-button"><a class="button button-gray-6 button-zakaria fl-bigmug-line-search74" href="images/masonry-gallery/image-1.jpg" data-lightgallery="item"><img src="images/masonry-gallery/image-1.jpg" alt="" width="270" height="250"/></a></div>
+                    <div class="thumbnail-classic-button"><a class="button button-secondary-3 button-zakaria fl-bigmug-line-shopping202" href="cart-page.html"></a></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-sm-6 col-lg-4 col-xl-3 isotope-item"> 
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail-classic block-1">
+              <div class="thumbnail-classic-figure"><img src="images/masonry-gallery/image-2.jpg" alt="" width="270" height="530"/> </div>
+              <div class="thumbnail-classic-caption">
+                <div>
+                  <h5 class="thumbnail-classic-title"><a href="single-product.html">Biscuits</a></h5>
+                  <div class="thumbnail-classic-price">$12.99</div>
+                  <div class="thumbnail-classic-button-wrap">
+                    <div class="thumbnail-classic-button"><a class="button button-gray-6 button-zakaria fl-bigmug-line-search74" href="images/masonry-gallery/image-2.jpg" data-lightgallery="item"><img src="images/masonry-gallery/image-2.jpg" alt="" width="270" height="530"/></a></div>
+                    <div class="thumbnail-classic-button"><a class="button button-secondary-3 button-zakaria fl-bigmug-line-shopping202" href="cart-page.html"></a></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-sm-6 col-lg-4 col-xl-3 isotope-item"> 
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail-classic block-1">
+              <div class="thumbnail-classic-figure"><img src="images/masonry-gallery/image-3.jpg" alt="" width="270" height="250"/> </div>
+              <div class="thumbnail-classic-caption">
+                <div>
+                  <h5 class="thumbnail-classic-title"><a href="single-product.html">Cupcakes</a></h5>
+                  <div class="thumbnail-classic-price">$10.99</div>
+                  <div class="thumbnail-classic-button-wrap">
+                    <div class="thumbnail-classic-button"><a class="button button-gray-6 button-zakaria fl-bigmug-line-search74" href="images/masonry-gallery/image-3.jpg" data-lightgallery="item"><img src="images/masonry-gallery/image-3.jpg" alt="" width="270" height="250"/></a></div>
+                    <div class="thumbnail-classic-button"><a class="button button-secondary-3 button-zakaria fl-bigmug-line-shopping202" href="cart-page.html"></a></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-sm-6 col-lg-4 col-xl-3 isotope-item"> 
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail-classic block-1">
+              <div class="thumbnail-classic-figure"><img src="images/masonry-gallery/image-4.jpg" alt="" width="270" height="250"/> </div>
+              <div class="thumbnail-classic-caption">
+                <div>
+                  <h5 class="thumbnail-classic-title"><a href="single-product.html">Birthday Cakes</a></h5>
+                  <div class="thumbnail-classic-price">$13.99</div>
+                  <div class="thumbnail-classic-button-wrap">
+                    <div class="thumbnail-classic-button"><a class="button button-gray-6 button-zakaria fl-bigmug-line-search74" href="images/masonry-gallery/image-4.jpg" data-lightgallery="item"><img src="images/masonry-gallery/image-4.jpg" alt="" width="270" height="250"/></a></div>
+                    <div class="thumbnail-classic-button"><a class="button button-secondary-3 button-zakaria fl-bigmug-line-shopping202" href="cart-page.html"></a></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-sm-6 col-lg-4 col-xl-3 isotope-item"> 
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail-classic block-1">
+              <div class="thumbnail-classic-figure"><img src="images/masonry-gallery/image-5.jpg" alt="" width="270" height="250"/> </div>
+              <div class="thumbnail-classic-caption">
+                <div>
+                  <h5 class="thumbnail-classic-title"><a href="single-product.html">Custom Cakes</a></h5>
+                  <div class="thumbnail-classic-price">$14.99</div>
+                  <div class="thumbnail-classic-button-wrap">
+                    <div class="thumbnail-classic-button"><a class="button button-gray-6 button-zakaria fl-bigmug-line-search74" href="images/masonry-gallery/image-5.jpg" data-lightgallery="item"><img src="images/masonry-gallery/image-5.jpg" alt="" width="270" height="250"/></a></div>
+                    <div class="thumbnail-classic-button"><a class="button button-secondary-3 button-zakaria fl-bigmug-line-shopping202" href="cart-page.html"></a></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-sm-6 col-lg-4 col-xl-6 isotope-item"> 
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail-classic block-1">
+              <div class="thumbnail-classic-figure"><img src="images/masonry-gallery/image-6.jpg" alt="" width="570" height="530"/> </div>
+              <div class="thumbnail-classic-caption">
+                <div>
+                  <h5 class="thumbnail-classic-title"><a href="single-product.html">Wedding Cakes</a></h5>
+                  <div class="thumbnail-classic-price">$16.99</div>
+                  <div class="thumbnail-classic-button-wrap">
+                    <div class="thumbnail-classic-button"><a class="button button-gray-6 button-zakaria fl-bigmug-line-search74" href="images/masonry-gallery/image-6.jpg" data-lightgallery="item"><img src="images/masonry-gallery/image-6.jpg" alt="" width="570" height="530"/></a></div>
+                    <div class="thumbnail-classic-button"><a class="button button-secondary-3 button-zakaria fl-bigmug-line-shopping202" href="cart-page.html"></a></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div class="col-sm-6 col-lg-8 col-xl-6 isotope-item"> 
+            <!-- Thumbnail Classic-->
+            <article class="thumbnail-classic block-1">
+              <div class="thumbnail-classic-figure"><img src="images/masonry-gallery/image-7.jpg" alt="" width="570" height="250"/> </div>
+              <div class="thumbnail-classic-caption">
+                <div>
+                  <h5 class="thumbnail-classic-title"><a href="single-product.html">Pies</a></h5>
+                  <div class="thumbnail-classic-price">$10.99</div>
+                  <div class="thumbnail-classic-button-wrap">
+                    <div class="thumbnail-classic-button"><a class="button button-gray-6 button-zakaria fl-bigmug-line-search74" href="images/masonry-gallery/image-7.jpg" data-lightgallery="item"><img src="images/masonry-gallery/image-7.jpg" alt="" width="570" height="250"/></a></div>
+                    <div class="thumbnail-classic-button"><a class="button button-secondary-3 button-zakaria fl-bigmug-line-shopping202" href="cart-page.html"></a></div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Subscribe to Our Newsletter-->
+  <section class="parallax-container call_section">
+    <div class="parallax-content section-xxl context-dark text-lg-left">
+      <div class="container">
+        <div class="row row-30 justify-content-center align-items-center align-items-lg-end">
+          <div class="col-xl-4">
+            <h2 class="parallax-title text-center text-xl-left wow fadeInLeft" data-wow-delay=".1s">Get in Touch</h2>
+          </div>
+          <div class="col-xl-8 inset-lg-bottom-10"> 
+            <!-- RD Mailform-->
+            <form class="ch-form ch-mailform ch-form-inline ch-form-inline-3 form-lg" data-form-output="form-output-global" data-form-type="subscribe" method="post" action="#">
+              <div class="form-wrap wow fadeInUp">
+                <input class="form-input" id="login-name" type="text" name="name" data-constraints="@Required"/>
+                <label class="form-label" for="login-name">Your name</label>
+              </div>
+              <div class="form-wrap wow fadeInUp">
+                <input class="form-input" id="contact-email" type="email" name="email" data-constraints="@Email @Required"/>
+                <label class="form-label" for="contact-email">Your e-mail address</label>
+              </div>
+              <div class="form-button wow fadeInRight text-center">
+                <button class="button button-zakaria button-sm button-primary" type="submit">send request</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Our Team-->
+  <section class="section section-xxl bg-default">
+    <div class="container">
+      <h2 class="text-transform-capitalize wow fadeScale">Our Team</h2>
+      <!-- Owl Carousel-->
+      <div class="owl-carousel owl-style-9" data-items="1" data-sm-items="2" data-md-items="3" data-lg-items="4" data-margin="30" data-dots="true" data-mouse-drag="false">
+        <article class="team-modern box-sm wow slideInUp"><a class="team-modern-figure" href="#"><img src="images/team/chef-1.jpg" alt="" width="270" height="227"/></a>
+          <h4 class="team-modern-name"><a href="#">John Doe</a></h4>
+          <p class="team-modern-text">Lorem Ipsum is simply dummy text of the printing and industry.</p>
+          <ul class="list-inline team-modern-list-social list-social-2 list-inline-sm">
+            <li><a class="icon mdi mdi-facebook" href="#"></a></li>
+            <li><a class="icon mdi mdi-twitter" href="#"></a></li>
+            <li><a class="icon mdi mdi-instagram" href="#"></a></li>
+            <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
+          </ul>
+        </article>
+        <article class="team-modern box-sm wow slideInUp" data-wow-delay=".1s"><a class="team-modern-figure" href="#"><img src="images/team/chef-2.jpg" alt="" width="270" height="227"/></a>
+          <h4 class="team-modern-name"><a href="#">John Doe</a></h4>
+          <p class="team-modern-text">Lorem Ipsum is simply dummy text of the printing and dummy of industry.</p>
+          <ul class="list-inline team-modern-list-social list-social-2 list-inline-sm">
+            <li><a class="icon mdi mdi-facebook" href="#"></a></li>
+            <li><a class="icon mdi mdi-twitter" href="#"></a></li>
+            <li><a class="icon mdi mdi-instagram" href="#"></a></li>
+            <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
+          </ul>
+        </article>
+        <article class="team-modern box-sm wow slideInUp" data-wow-delay=".2s"><a class="team-modern-figure" href="#"><img src="images/team/chef-10.jpg" alt="" width="270" height="227"/></a>
+          <h4 class="team-modern-name"><a href="#">John Doe</a></h4>
+          <p class="team-modern-text">Lorem Ipsum is simply dummy text of the printing and industry.</p>
+          <ul class="list-inline team-modern-list-social list-social-2 list-inline-sm">
+            <li><a class="icon mdi mdi-facebook" href="#"></a></li>
+            <li><a class="icon mdi mdi-twitter" href="#"></a></li>
+            <li><a class="icon mdi mdi-instagram" href="#"></a></li>
+            <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
+          </ul>
+        </article>
+        <article class="team-modern box-sm wow slideInUp" data-wow-delay=".3s"><a class="team-modern-figure" href="#"><img src="images/team/chef-11.jpg" alt="" width="270" height="227"/></a>
+          <h4 class="team-modern-name"><a href="#">John Doe</a></h4>
+          <p class="team-modern-text">Lorem Ipsum is simply dummy text of the printing and dummy of industry.</p>
+          <ul class="list-inline team-modern-list-social list-social-2 list-inline-sm">
+            <li><a class="icon mdi mdi-facebook" href="#"></a></li>
+            <li><a class="icon mdi mdi-twitter" href="#"></a></li>
+            <li><a class="icon mdi mdi-instagram" href="#"></a></li>
+            <li><a class="icon mdi mdi-google-plus" href="#"></a></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+  
+{% endblock content %}

@@ -1,0 +1,88 @@
+{% extends 'app/main.html' %}
+{% load static %}
+{% block content %}
+ <!--+breadcrumbs-->
+ <section class="breadcrumbs-custom">
+	<div class="parallax-container breadcrumbs_section">
+	  <div class="breadcrumbs-custom-body parallax-content context-dark">
+		<div class="container">
+		  <h1 class="breadcrumbs-custom-title">Cart</h1>
+		</div>
+	  </div>
+	</div>
+	<div class="breadcrumbs-custom-footer">
+	  <div class="container">
+		<ul class="breadcrumbs-custom-path">
+		  <li><a href="{% url 'store' %}">Home</a></li>
+		  <li><a href="{% url 'shop' %}">Shop</a></li>
+		  <li class="active">cart</li>
+		</ul>
+	  </div>
+	</div>
+  </section>
+  <div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="box-element">
+				<a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+				<br>
+				<br>
+				<table class="table">
+					<tr>
+						<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+						<th><h5>Total:<strong> Rs. {{order.get_cart_total}}</strong></h5></th>
+						<th>
+							<a  style="float:right; margin:5px;" class="button button-sm button-secondary button-zakaria" href="{% url 'checkout' %}">Checkout</a>
+						</th>
+					</tr>
+				</table>
+			</div>
+			<br>
+			<div class="box-element">
+				<div class="cart-row">
+					<div style="flex:2"></div>
+					<div style="flex:2"><strong>Item</strong></div>
+					<div style="flex:1"><strong>Price</strong></div>
+					<div style="flex:1"><strong>Quantity</strong></div>
+					<div style="flex:1"><strong>Total</strong></div>
+				</div>
+
+				{% for item in items %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>	&#x20B9;{{item.product.price}}</p></div>
+					<div style="flex:1">
+						<p class="quantity">{{item.quantity}}</p>
+						<div class="quantity">
+							<img class="chg-quantity update-cart" data-product="{{item.product.id}}" data-action="add" src="{% static  'images/arrow-up.png' %}">
+													                                                                                           	
+							<img class="chg-quantity update-cart" data-product="{{item.product.id}}" data-action="remove" src="{% static  'images/arrow-down.png' %}">
+						</div>
+					</div>
+					<div style="flex:1"><p>&#x20B9;{{item.get_total}}</p></div>
+				</div>
+				{% endfor %}
+				{% for item in items2 %}
+				<div class="cart-row">
+					<div style="flex:2"><img class="row-image" src="{% static 'images/customcake.jpg' %}"></div>
+					<div style="flex:2"><p><strong>Size</strong>={{item.size}},<strong>Flavor</strong>={{item.flavor}},<strong>Shape</strong>={{item.shape}},<br><strong>Name on cake</strong>={{item.name_on_cake}}</p></div>
+					<div style="flex:1"><p>	&#x20B9;{{item.get_product_total}}</p></div>
+					<div style="flex:1">
+						<p class="quantity">{{item.quantity}}</p>
+						<div class="quantity">
+							<img class="chg-quantity update-custom" data-product="{{item.id}}" data-action="add" src="{% static  'images/arrow-up.png' %}">
+													                                                                                           	
+							<img class="chg-quantity update-custom" data-product="{{item.id}}" data-action="remove" src="{% static  'images/arrow-down.png' %}">
+						</div>
+					</div>
+					<div style="flex:1"><p>&#x20B9;{{item.get_total}}</p></div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	</div>
+	<br>
+	<br><br><br>
+{% endblock content %}

@@ -1,0 +1,38 @@
+{% extends 'seller/main.html' %}
+{% block content %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+<br>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>customer</th>
+                    <th>name</th>
+                    <th>phone</th>
+                    <th>address</th>
+                    <th>city</th>
+                    <th>state</th>
+                    <th>zipcode</th>
+                </tr>             
+              
+                <tr>
+                    <td>{{shipping.customer}}</td>
+                    <td>{{shipping.customer.name}}</td>
+                    <td>{{shipping.customer.phone}}</td>
+                    <td>{{shipping.address}}</td>
+                    <td>{{shipping.city}}</td>
+                    <td>{{shipping.state}}</td>
+                    <td>{{shipping.zipcode}}</td>
+                </tr>
+              
+            </table>
+        </div> 
+    </div>  
+</div>    
+
+{% endblock content %}

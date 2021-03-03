@@ -1,0 +1,132 @@
+{% extends 'seller/main.html' %}
+{% block content %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+<br>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card card-body">
+            <h4 class="text-center">Order status</h4>
+            <hr>
+            <h6 class="text-center text-secondary">Total orders : {{total_orders}}</h6>
+            <canvas id="myChart" width="100" height="100"></canvas>
+        </div>
+
+    </div>
+    <div class="col-md-8">
+        <div class="card card-body">
+            <input class="form-control" style="border:1px solid #2196F3;" id="myInput1" type="text" placeholder="Search Order..">
+            <hr>
+            
+            <table class="table table-sm">
+                <tr>
+                    <th>Customer details</th>
+                    <th>Customer</th>
+                    <!--th>seller</th-->
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Change Status</th>
+                </tr>
+                <tbody id="myTable1">
+                {% for i in orders %}
+                    <tr>
+                        <td><a class="btn btn-sm btn-info" href='{% url "customer" i.order.id %}'>View</a></td>
+                        <td>{{i.order.customer}}</td>
+                        <td>{{i.product}}</td>
+                        <td>{{i.quantity}}</td>
+                        <td>{{i.status}}</td>
+                        <td><a class="btn btn-danger btn-sm" href="{% url 'editstatus' i.id %}">Edit status</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md">
+        <div class="card card-body">
+            <input class="form-control" style="border:1px solid #2196F3;" id="myInput2" type="text" placeholder="Search Order..">
+            <hr>
+            
+            <table class="table table-sm">
+                <tr>
+                    <th>Customer details</th>
+                    <th>Customer</th>
+                    <!--th>seller</th-->
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Change Status</th>
+                </tr>
+                <tbody id="myTable2">
+                {% for i in customitem %}
+                    <tr>
+                        <td><a class="btn btn-sm btn-info" href='{% url "customer" i.order.id %}'>View</a></td>
+                        <td>{{i.order.customer}}</td>
+                        <td><strong>Size</strong>={{i.size}},<strong>Flavor</strong>={{i.flavor}},<strong>Shape</strong>={{i.shape}},<br><strong>Name on cake</strong>={{i.name_on_cake}}</td>
+                        <td>{{i.quantity}}</td>
+                        <td>{{i.status}}</td>
+                        <td><a class="btn btn-danger btn-sm" href="{% url 'edit_custom_status' i.id %}">Edit status</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>  
+
+<br>    
+<div class="row">
+    <div class="col-md">
+        
+    </div>
+</div>
+<br>
+
+
+<!--Search functionality-->          
+<script>
+    $(document).ready(function(){
+      $("#myInput1").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("#myTable1 tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+
+    $(document).ready(function(){
+        $("#myInput2").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#myTable2 tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+
+</script>
+<!--start chart functionality-->  
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script type="text/javascript">
+        //Order status Graph    
+        var ctx1 = document.getElementById('myChart').getContext('2d');
+        var a1 = '{{pending}}';
+        var b1 = '{{ourfordelivery}}';
+        var c1 = '{{delivered}}';
+        
+        var myChart = new Chart(ctx1, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pending', 'Out for delivery', 'Delivered'],
+                datasets: [{
+                    label: 'Order',
+                    data: [a1, b1, c1],
+                    backgroundColor: ['#FF6384','#FFCD56','#36A2EB'],
+                    }]
+            },
+        });
+</script>
+
+<!--End Search functionality-->  
+{% endblock content %}
